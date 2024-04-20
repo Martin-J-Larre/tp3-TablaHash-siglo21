@@ -5,11 +5,15 @@ package tablahashtp3;
 
 public class TablaHashTP3 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
+     
+    
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
+       TablaHash tabla = new TablaHash();
+       
+       for(Integer i = -50; i <=50; i++){
+           tabla.insertarHash(i);
+       }
+    };
     
 }
