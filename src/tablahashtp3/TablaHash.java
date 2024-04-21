@@ -19,19 +19,19 @@ public class TablaHash {
     
     // FuncionHash asigna una clave
     static int funcionHash(int n, int m){
-        int result  = ((n & 0x7fffffff) % m); 
-        System.out.println("Hashed ---->" + result);
-        return result; 
-        // ((n & 0x7fffffff) % m) ???? This is not working
-        
-        //Buena opción: f(c) = c % B, siendo c la clave y B el tamaño de la tabla
-        //return (n % m); No
-        //return ((n + 1) % m);
+        //int result  = ((n & 0x7fffffff) % m); 
+//        int result  = (n & 0x7fffffff) % m; 
+//        System.out.println("Hashed ---->" + result);
+//        return result; 
+        // ((n & 0x7fffffff) % m)  ---> 0, 10, 7, 2
+        // (n % m); ------> 0, 10, 7, 2
+        // ((n + 1) % m); -----> 1, 11, 8, 3
+        System.out.println((n & 0x7fffffff) % m);
+        return (n & 0x7fffffff) % m;
         
     }
     
     static void insertaHash(TablaHash[] h, int m, int n) {
-        System.out.println("n" + n);
         boolean i = false;
         int j = funcionHash(n, m);
         do {
@@ -56,7 +56,22 @@ public class TablaHash {
         //n es el valor buscado
         // y debe devolver el valor mismo que busca n si lo encuentra y -1 si no
         // encuentra nada
-        return 1;
+        
+        // 1 - recorrer h y en cada iteracion 
+        // 2 - checkear si estado es 0 (vacio) y retornar -1
+        // 3 - chechear si estado es 1 (eliminado) y retornar -1
+        // 4 - Si pasan todas esas validacions retornar el valor del index 
+        // 5 - 
+        boolean i = false;
+        int j = funcionHash(n, m);
+        do {            
+            if (h[j].estado == 0 || h[j].estado == 1) {
+                return -1;
+            } else if (h[j].dato == n) {
+                return j;
+            }
+ 
+        } while (j < m && !i);
         }
     
     

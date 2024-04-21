@@ -22,6 +22,16 @@ public class TablaHashTP3 {
     TablaHash.insertaHash(h, m, 130);
     TablaHash.insertaHash(h, m, 7);
     TablaHash.insertaHash(h, m, 32);
+//    TablaHash.insertaHash(h, m, 42);
+//    TablaHash.insertaHash(h, m, 62);
+//    TablaHash.insertaHash(h, m, 162);
+//    TablaHash.insertaHash(h, m, 752);
+//    TablaHash.insertaHash(h, m, 678);
+
+    //Buscando un elemento
+
+    elemento=7;
+    i = TablaHash.buscaHash(h, m, elemento);
     };
 
     
