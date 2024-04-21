@@ -9,26 +9,31 @@ package tablahashtp3;
  * @author martin
  */
 public class TablaHash {
-    private final Integer size = 13;
+    int dato;
+    int estado;
+    
 
     public TablaHash(){
         
     }
     
     // FuncionHash asigna una clave
-    private Integer funcionHash(Integer k){
-        Integer key = 0;
+    static int funcionHash(int n, int m){
         
-        key = (k & 0x7fffffff) % size;
-        return key;
+        //return ((n & 0x7fffffff) % m); This is not working
+        
+        //Buena opción: f(c) = c % B, siendo c la clave y B el tamaño de la tabla
+        //return (n % m); No
+        return ((n + 1) % m);
+        
     }
     
     public Integer buscarHash(){
         return null;
     }
     
-    public void insertarHash(Integer k){
-        System.out.println(k + " Tiene el Hash --->" + funcionHash(k));
+    public void insertarHash(int n, int m){
+        System.out.println(n + " Tiene el Hash --->" + funcionHash(n, m));
     };
     
     public void eliminarHash(){}
