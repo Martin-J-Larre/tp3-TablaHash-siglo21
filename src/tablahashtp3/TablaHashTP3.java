@@ -9,12 +9,20 @@ public class TablaHashTP3 {
      
     
     public static void main(String[] args) {
-       TablaHash tabla = new TablaHash();
-       int m = 15;
-       
-       for(Integer i = 0; i <m; i++){
-           tabla.insertarHash(i, m);
-       }
+       int i, n,elemento;
+        // Tabla Definida de 15
+        int m=15;
+        TablaHash[] h = new TablaHash[m];
+        for (i = 0; i < m; i++) {
+            h[i] = new TablaHash();
+            h[i].estado = 0;
+        }    
+    // Insertar elemento
+    TablaHash.insertaHash(h, m, 15);
+    TablaHash.insertaHash(h, m, 130);
+    TablaHash.insertaHash(h, m, 7);
+    TablaHash.insertaHash(h, m, 32);
     };
+
     
 }
