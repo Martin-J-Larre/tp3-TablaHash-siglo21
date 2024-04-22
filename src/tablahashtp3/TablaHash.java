@@ -19,59 +19,65 @@ public class TablaHash {
     
     // FuncionHash asigna una clave
     static int funcionHash(int n, int m){
-        //int result  = ((n & 0x7fffffff) % m); 
-//        int result  = (n & 0x7fffffff) % m; 
-//        System.out.println("Hashed ---->" + result);
-//        return result; 
-        // ((n & 0x7fffffff) % m)  ---> 0, 10, 7, 2
-        // (n % m); ------> 0, 10, 7, 2
-        // ((n + 1) % m); -----> 1, 11, 8, 3
-        System.out.println((n & 0x7fffffff) % m);
-        return (n & 0x7fffffff) % m;
-        
+        return (n & 0x7fffffff) % m;    
+
     }
     
     static void insertaHash(TablaHash[] h, int m, int n) {
         boolean i = false;
         int j = funcionHash(n, m);
+        int el = 0;
+        int b = 0;
         do {
-        if (h[j].estado == 0 || h[j].estado == 1) {
-        h[j].dato = n;
-        h[j].estado = 2;
-        i = true;
-        } else {
-        j++;
-        }
+            if (h[j].estado == 0 || h[j].estado == 1) {
+                h[j].dato = n;
+                h[j].estado = 2;
+                i = true;
+                el = h[j].dato = n;
+                b = j;
+            } else {
+                j++;
+            }
         } while (j < m && !i);
         if (i) {
-        System.out.print ("Elemento insertado con Éxito! \n");
+            System.out.print ("Elemento " + el + " insertado con Éxito! en el bucket " + b + " \n");
         } else {
-        System.out.print ("Tabla llena!!! \\n");
-        }
+            System.out.print ("Tabla llena!!! \n");
+            }
         }
     
+    
+        // 1 - Hashear n y guardar el resultado de la llave en j
+        // 2 - En un loop ejecutar la posicion de la llave j y en esa iteracion checkear
+        // .   las condiciones, en el caso de no econtar el dato buscado
+        // .   incrementar j+= y ejecutar el proceso en la suiente iteracion, ya 
+        //     que el dato que se busca puede estar en otra posicion por colision.   
+        // 3 - checkear si estado es 0 (vacio) y retornar -1
+        // 4 - chechear si hay coincide el dato y si estado es 1 (eliminado) entonces 
+        // .   retornar -1 sino retornar el dato buscado.
+        // 5 - Si ninguna de los condiciones es vedadera incrementar j+= y ejecutar 
+        //     el proceso en la suiente iteracion hasta que no pase la condicion del loop y
+        //     retorne -1 sin poder encontar el dato.
+    
     static int buscaHash(TablaHash[] h, int m, int n) {
-        //h es la tabla hash
-        //m es el tamaño de la tabla
-        //n es el valor buscado
-        // y debe devolver el valor mismo que busca n si lo encuentra y -1 si no
-        // encuentra nada
-        
-        // 1 - recorrer h y en cada iteracion 
-        // 2 - checkear si estado es 0 (vacio) y retornar -1
-        // 3 - chechear si estado es 1 (eliminado) y retornar -1
-        // 4 - Si pasan todas esas validacions retornar el valor del index 
-        // 5 - 
-        boolean i = false;
+
         int j = funcionHash(n, m);
-        do {            
-            if (h[j].estado == 0 || h[j].estado == 1) {
-                return -1;
-            } else if (h[j].dato == n) {
-                return j;
-            }
- 
-        } while (j < m && !i);
+        do { 
+            if (h[j].estado == 0) {
+               return -1; 
+            } else if (h[j].dato == n){
+                   if(h[j].estado == 1){
+                       return -1;
+                   } else {
+                       System.out.print ("Elemento " + n + " encontrado en el bucket " + j + "! \n");
+                       return j;
+                   }
+            } else {
+                    j++;
+               }
+           
+        } while (j < m);
+            return -1;
         }
     
     
@@ -81,7 +87,7 @@ public class TablaHash {
     return -1;
     } else {
     h[i].estado = 1;
-    System.out.print ("Elemento Borrado! \n");
+    System.out.print ("Elemento " + n + " Borrado! \n");
     return 1;
     }
     }
